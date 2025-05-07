@@ -15,7 +15,8 @@ def load_xy_folder(folder_path: Union[str, Path], x_label: str = "x", skiprows: 
     Args:
         folder_path (Union[str, Path]): Path to the folder containing the .txt files.
         x_label (str): Name to assign to the x-axis column (default is "x").
-        skiprows (int): Number of lines to skip at the beginning of each file (default is 0).
+        skiprows (int): Number of lines to skip at the beginning of each file (default is 0). 
+        Adjust this if the files contain headers or metadata rows.
 
     Returns:
         pd.DataFrame: A DataFrame with the x-axis column and one column per file, merged by x values.
