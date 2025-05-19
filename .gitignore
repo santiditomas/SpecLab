@@ -1,6 +1,9 @@
 # Virtual Environment
 venv/
 
+# Testing
+sandbox/
+
 # Python
 __pycache__/
 *.py[cod]

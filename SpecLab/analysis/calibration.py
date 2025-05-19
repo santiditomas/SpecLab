@@ -36,3 +36,4 @@ def calibration_curve(
     ax.grid(True)
 
     return fig, {"slope": slope, "intercept": intercept, "r2": r2}       
+
