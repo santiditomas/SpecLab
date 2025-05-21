@@ -34,7 +34,7 @@ def calibration_curve(
     ax.plot(X, predictions, label=f"Lineal regression\n$R^2$ = {r2:.3f}", color="red")
     ax.legend()
     ax.grid(True)
-    fig.show()
+    plt.show()
 
     return fig, {"slope": slope, "intercept": intercept, "r2": r2}       
 

@@ -25,8 +25,8 @@ def load_xy_folder(folder_path: Union[str, Path], x_label: str = "wavelength", s
     merged_df = None
 
     for file in files:
-        df = pd.read_csv(file, skiprows=skiprows)
-        df.columns = [x_label, file.stem]
+        df = pd.read_csv(file, skiprows=skiprows, names = [x_label, file.stem])
+        df = df.dropna()
         if merged_df is None:
             merged_df = df
         else:
