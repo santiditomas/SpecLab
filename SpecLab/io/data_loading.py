@@ -25,11 +25,14 @@ def load_xy_folder(folder_path: Union[str, Path], x_label: str = "wavelength", s
     merged_df = None
 
     for file in files:
-        df = pd.read_csv(file, skiprows=skiprows, names = [x_label, file.stem])
-        df = df.dropna()
+        df = pd.read_csv(file, skiprows=skiprows, na_values=["", " "])
+        df.columns = [x_label, file.stem]
+        df[file.stem] = pd.to_numeric(df[file.stem], errors="coerce")
         if merged_df is None:
             merged_df = df
         else:
             merged_df = pd.merge(merged_df, df, on=x_label, how="outer")
 
     return merged_df.sort_values(x_label).reset_index(drop=True)
+
+load_xy_folder(r"C:\Users\Santino\Downloads\16-05\mb", skiprows=1)
