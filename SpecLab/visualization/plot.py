@@ -8,7 +8,9 @@ def plot(
     x_col: str = "wavelength",
     target_cols: list[str] = None,
     xlim: list[float] = [0, 0],
-    ylim: list[float] = [0, 0]
+    ylim: list[float] = [0, 0],
+    x_label: str = "wavelength",
+    y_label: str = "Value"
 ):
     if target_cols is None:
         target_cols = [col for col in df.columns if col != x_col]
@@ -18,7 +20,7 @@ def plot(
         for col in target_cols:
             ax.plot(df[x_col], df[col], label=col)
         ax.set_xlabel(x_col)
-        ax.set_ylabel("Value")
+        ax.set_ylabel(y_label)
         ax.legend()
 
         if xlim != [0, 0]:
