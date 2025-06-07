@@ -1,11 +1,12 @@
 import pandas as pd
 from pathlib import Path
-from typing import Union
+from typing import Union, Optional, List
 
 def load_xy_folder(folder_path: Union[str, Path], 
                    x_label: str = "wavelength", 
                    skiprows: int = 0,
-                   extensions: tuple = (".txt", ".csv")) -> pd.DataFrame:
+                   extensions: tuple = (".txt", ".csv"),
+                   filter: Optional[List[str]] = None) -> pd.DataFrame:
     """
     Loads and merges multiple two-column text or CSV files from a folder (recursively) into a single DataFrame.
 
@@ -14,12 +15,16 @@ def load_xy_folder(folder_path: Union[str, Path],
         x_label (str): Name to assign to the x-axis column (default is "wavelength").
         skiprows (int): Number of rows to skip at the beginning of each file.
         extensions (tuple): File extensions to consider (default: (".txt", ".csv")).
+        filter (Optional[List[str]]): List of strings. Only files whose name contains at least one of these strings
+            will be loaded. If None or empty, all files are loaded.
 
     Returns:
         pd.DataFrame: DataFrame with merged x-values and one y-column per file (named after filename).
     """
     folder_path = Path(folder_path)
     files = sorted([f for f in folder_path.rglob("*") if f.suffix in extensions])
+    if filter:
+        files = [f for f in files if any(word in f.name for word in filter)]
 
     merged_df = None
 
